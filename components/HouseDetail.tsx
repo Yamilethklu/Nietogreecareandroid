@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { adminRequest } from '../services/admin';
 import { texasDate } from '../services/daily-agenda';
 import { InvoicesPanel } from './InvoicesPanel';
+import { DayCalendar } from './DayCalendar';
 import { PAGE_SIZE, isDate, weekdayName, type House, type Invoice, type Order } from '../src/panel';
 
 const input = { borderWidth: 1, borderColor: '#86efac', backgroundColor: '#fff', color: '#111827', borderRadius: 8, padding: 12, marginTop: 4, marginBottom: 10 } as const;
@@ -28,6 +29,7 @@ export function HouseDetail({ house, orders, invoices, houses, onBack, onEditHou
   const [showNew, setShowNew] = useState(false);
   const [service, setService] = useState('');
   const [date, setDate] = useState(texasDate());
+  const [extraCalendarOpen, setExtraCalendarOpen] = useState(false);
   const [price, setPrice] = useState(String(house.price || ''));
   const [notes, setNotes] = useState('');
   const [busy, setBusy] = useState(false);
@@ -106,7 +108,7 @@ export function HouseDetail({ house, orders, invoices, houses, onBack, onEditHou
           <Text style={{ marginTop: 8, fontWeight: '700' }}>Servicio</Text>
           <TextInput style={input} value={service} onChangeText={setService} placeholder="Ej. Limpieza de jardín" />
           <Text style={{ fontWeight: '700' }}>Fecha</Text>
-          <TextInput style={input} value={date} onChangeText={setDate} placeholder="AAAA-MM-DD" autoCapitalize="none" />
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}><TextInput style={[input, { flex: 1 }]} value={date} onChangeText={setDate} placeholder="AAAA-MM-DD" autoCapitalize="none" /><Pressable accessibilityRole="button" accessibilityLabel="Elegir fecha de la orden" onPress={() => setExtraCalendarOpen(true)} style={{ backgroundColor: '#dcfce7', padding: 12, borderRadius: 8 }}><Ionicons name="calendar-outline" size={23} color="#14532d" /></Pressable></View><DayCalendar visible={extraCalendarOpen} selected={isDate(date) ? date : texasDate()} onSelect={setDate} onClose={() => setExtraCalendarOpen(false)} />
           <Text style={{ fontWeight: '700' }}>Precio</Text>
           <TextInput style={input} value={price} onChangeText={setPrice} keyboardType="decimal-pad" />
           <Text style={{ fontWeight: '700' }}>Notas</Text>
