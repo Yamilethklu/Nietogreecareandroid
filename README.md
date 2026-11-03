@@ -18,3 +18,15 @@ El workflow comprueba `npm ci` y `npm run typecheck` antes de solicitar la compi
 
 ## Consideraciones
 El APK de referencia aportado confirma el tipo de aplicación de trabajo, pero el código no se extrae del APK: se toma de la fuente iOS actualizada. No se modifica la base Supabase existente ni se duplican sus datos.
+
+## Enlaces de instalación y actualizaciones
+
+**Entrada estable Android:** este README. El APK descargable debe provenir de una compilación completada y verificada; no confundir el enlace del repositorio con un APK.
+
+- [Compilaciones y ejecuciones de GitHub Actions](https://github.com/Yamilethklu/Nietogreecareandroid/actions).
+- [Releases / APK publicados](https://github.com/Yamilethklu/Nietogreecareandroid/releases) (solo usar si existe un APK real).
+- [Instalación privada Apple e información OTA](https://github.com/Yamilethklu/NietoGreenCareApp#instalación-privada-del-propietario-iphone).
+
+**Estado de la nube:** el proyecto Android requiere configurar su propio `extra.eas.projectId` y validar las credenciales de EAS antes de construir APK. No afirmar que Android recibe OTA automáticamente sin confirmar `expo-updates`, `runtimeVersion`, canal y un workflow de publicación para Android. Las actualizaciones iOS del otro repositorio no actualizan este APK.
+
+**Privacidad:** no subir credenciales, perfiles, tokens ni datos de clientes al repositorio. Compartir solo artefactos de instalación verificados.
